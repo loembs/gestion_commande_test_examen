@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:controller="com.patrick.controllers.CommandeViewController" 
+      xmlns:fx="http://javafx.com/fxml" 
+      spacing="15" 
+      stylesheets="@../styles/commande.css">
+    
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Première partie - Informations client -->
+    <GridPane hgap="10" vgap="10">
+        <Label text="Information Client" 
+               styleClass="header-label" 
+               GridPane.columnIndex="0" 
+               GridPane.rowIndex="0" 
+               GridPane.columnSpan="2"/>
+
+        <Label text="Téléphone:" 
+               GridPane.columnIndex="0" 
+               GridPane.rowIndex="1"/>
+        <TextField fx:id="phoneNumberField" 
+                  GridPane.columnIndex="1" 
+                  GridPane.rowIndex="1"/>
+
+        <Label text="Nom:" 
+               GridPane.columnIndex="0" 
+               GridPane.rowIndex="2"/>
+        <TextField fx:id="nomField" 
+                  GridPane.columnIndex="1" 
+                  GridPane.rowIndex="2" 
+                  editable="false"/>
+
+        <Label text="Adresse:" 
+               GridPane.columnIndex="0" 
+               GridPane.rowIndex="3"/>
+        <TextField fx:id="adresseField" 
+                  GridPane.columnIndex="1" 
+                  GridPane.rowIndex="3" 
+                  editable="false"/>
+    </GridPane>
+
+    <!-- Deuxième partie - Sélection articles -->
+    <VBox fx:id="articleSection" visible="false" spacing="10">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <ComboBox fx:id="articleComboBox" 
+                      prefWidth="200"/>
+            <TextField fx:id="quantityField" 
+                      prefWidth="100" 
+                      promptText="Quantité"/>
+            <TextField fx:id="prixField" 
+                      prefWidth="100" 
+                      promptText="Prix" 
+                      editable="false"/>
+            <Button text="Ajouter" 
+                    onAction="#onAddArticle"/>
+        </HBox>
+
+        <TableView fx:id="panierTable" prefHeight="200">
+            <columns>
+                <TableColumn fx:id="articleColumn" text="Article"/>
+                <TableColumn fx:id="prixUnitColumn" text="Prix unitaire"/>
+                <TableColumn fx:id="quantiteColumn" text="Quantité"/>
+                <TableColumn fx:id="montantColumn" text="Montant"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Label text="Total:"/>
+            <Label fx:id="totalLabel" styleClass="total-label"/>
+        </HBox>
+
+        <Button text="Valider la commande" 
+                onAction="#onSaveDebt" 
+                styleClass="primary-button"/>
+    </VBox>
+</VBox>
